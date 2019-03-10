@@ -25,8 +25,32 @@ describe("Server", () => {
 
   test("GET /greet?name=Bob", () => {
     return request(app)
-      .get("/greet?name=Bob")
+      .get("/greet")
+      .query({ name: "Bob" })
       .expect(200)
       .expect("Hello, Bob!");
+  });
+
+  describe("GET /secret", () => {
+    test("should deny access to route", done => {
+      request(app)
+        .get("/secret")
+        .expect(403, done);
+    });
+
+    test("should deny access to route with incorrect token", done => {
+      request(app)
+        .get("/secret")
+        .set("Authorization", "Bearer " + "incorrect-token")
+        .expect(403, done);
+    });
+
+    test("should grant access to route with correct token", () => {
+      return request(app)
+        .get("/secret")
+        .set("Authorization", "Bearer " + "super-secret-token")
+        .expect(200)
+        .expect("Welcome to my secret garden!");
+    });
   });
 });
