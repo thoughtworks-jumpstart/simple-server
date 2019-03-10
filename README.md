@@ -7,7 +7,7 @@ A really simple server
 To run the server
 
 ```
-node index.js
+npm start
 ```
 
 Navigate your browser to http://localhost:8080
