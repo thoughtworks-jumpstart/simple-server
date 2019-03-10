@@ -9,6 +9,13 @@ describe("Server", () => {
       .expect("Hello, world!");
   });
 
+  test("GET /favicon.ico", () => {
+    return request(app)
+      .get("/favicon.ico")
+      .expect("content-type", "image/x-icon")
+      .expect(200);
+  });
+
   test("GET /greet", () => {
     return request(app)
       .get("/greet")
