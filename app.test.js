@@ -13,7 +13,7 @@ describe("Server", () => {
     return request(app)
       .get("/greet")
       .expect(200)
-      .expect("Greet someone by name with /greet?name='Jane Doe'");
+      .expect("Greet someone by name");
   });
 
   test("GET /greet?name=Bob", () => {

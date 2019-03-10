@@ -1,14 +1,9 @@
 const express = require("express");
 const app = express();
+const index = require("./routes/index");
+const greet = require("./routes/greet");
 
-app.get("/", (req, res) => res.send("Hello, world!"));
-
-app.get("/greet", (req, res) => {
-  let greeting = "Greet someone by name with /greet?name='Jane Doe'";
-  if (req.query.name != undefined) {
-    greeting = `Hello, ${req.query.name}!`;
-  }
-  res.send(greeting);
-});
+app.use("/", index);
+app.use("/greet", greet);
 
 module.exports = app;
